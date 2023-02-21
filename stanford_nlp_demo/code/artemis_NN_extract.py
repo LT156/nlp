@@ -8,7 +8,7 @@ from nltk.parse.stanford import StanfordParser
 from tqdm import tqdm
 #指明安装路径和语言类型(中文)
 
-demo_path='F:/work/style_emotion/stanford_nlp_demo'
+demo_path='F:/github_code/nlp/stanford_nlp_demo'
 
 nlp = StanfordCoreNLP(demo_path+'/sources/lib/stanford-corenlp-full-2018-02-27', lang='en')
 
@@ -33,18 +33,29 @@ def traverse_tree(tree):
                 if result[0] in ['NN','NR','NT','NNS','NNP','NNPS']:
                     NN_words.append(result[1])
 
-
+def get_NNS(text_list,index):
+    
+    print(index)
+    
+    
 if __name__=='__main__':
     #读取文件
     df = pd.read_csv(demo_path+'/sources/data_file/artemis_dataset_release_v0.csv')
-    text_list = df['utterance'].tolist()[:20]
+    text_list = df['utterance'].tolist()
     
     #文件清理
-    clean_text = [artemis_text_clean(sent) for sent in text_list]
+    clean_text = [artemis_text_clean(sent) for sent in tqdm(text_list)]
     
     NN_words = []
-    for sent in tqdm(text_list):
-        (result, )=parser.parse(nlp.word_tokenize(artemis_text_clean(sent)))
+    i=0
+    for sent in tqdm(clean_text):
+        i=i+1
+        if i==1000:
+            data = NN_words
+            f = open(demo_path+'/output/txt/NN_words_tmp.txt','w')
+            f.write(str(data).encode('gbk','ignore').decode('gbk'))
+            f.close()
+        (result, )=parser.parse(nlp.word_tokenize(sent))
         traverse_tree(result)
     
     data = NN_words

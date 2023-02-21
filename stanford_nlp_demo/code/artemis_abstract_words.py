@@ -10,7 +10,7 @@ from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
 from tqdm import tqdm
 
-demo_path='F:/work/style_emotion/stanford_nlp_demo'
+demo_path='F:/github_code/nlp/stanford_nlp_demo'
 wnl = WordNetLemmatizer()
 
 #抽象字典准备：
