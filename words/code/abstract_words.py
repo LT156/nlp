@@ -39,7 +39,7 @@ def get_NNwords(text):
 
 if __name__=='__main__':
     
-    df = pd.read_csv(demo_path+'/resource/data_file/artemis_preprocessed.csv')[:100]
+    df = pd.read_csv(demo_path+'/resource/data_file/artemis_preprocessed.csv')
     text_list = df['utterance'].tolist()
     text_list = [text.lower() for text in text_list]
     
