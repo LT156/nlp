@@ -1,7 +1,8 @@
 import pandas as pd
 from tqdm import tqdm
 from ast import literal_eval
-demo_path='F:/work/style_emotion/words'
+from demo_settings.get_demo_path import get_path
+demo_path = get_path()+'/words'
 if __name__=='__main__':
     df = pd.read_csv(demo_path+'/source/new_output/artemis_abstract_features.csv')
     df['abstract_NNs']=df['abstract_NNs'].apply(literal_eval)

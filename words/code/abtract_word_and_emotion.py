@@ -2,9 +2,10 @@ import pandas as pd
 import numpy as np
 from ast import literal_eval
 from tqdm import tqdm 
-demo_path='F:/work/style_emotion/words'
+from get_demo_path import get_path
+demo_path = get_path()+'/words'
 
-f = open(demo_path+'/source/new_output/artemis_abstract_1000.txt','r')
+f = open(demo_path+'/resource/new_output/artemis_abstract_1000.txt','r')
 content=f.read()
 f.close()
 artemis_abstract_1000 = literal_eval(content)
@@ -47,7 +48,7 @@ def record_word_emotion(word,emotion,abstract_emotions_dict):
     
         
 if __name__=='__main__':
-    df = pd.read_csv(demo_path+'/source/new_output/artemis_abstract_dict_df.csv')
+    df = pd.read_csv(demo_path+'/resource/new_output/artemis_abstract_dict_df.csv')
     df['NNS']=df['NNS'].apply(literal_eval)
     NN_list=df['NNS'].tolist()
     emotion_list=df['emotion'].tolist()
@@ -60,11 +61,11 @@ if __name__=='__main__':
     feature_dict=dict(zip(df['painting'].tolist(),abstract_features))
     
     data = abstract_emotions_dict
-    f = open(demo_path+'/source/new_output/artemis_abstract_emotions.txt','w')
+    f = open(demo_path+'/resource/new_output/artemis_abstract_emotions.txt','w')
     f.write(str(data).encode('gbk','ignore').decode('gbk'))
     f.close()
     
-    df.to_csv(demo_path+'/source/new_output/artemis_abstract_features.csv')
+    df.to_csv(demo_path+'/resource/new_output/artemis_abstract_features.csv')
     df['abstract_features']=abstract_features
     print("特征保存")
-    np.savez_compressed(demo_path+'/source/new_output/words_feature.npz', feature_df=df,columns=df.columns)
+    np.savez_compressed(demo_path+'/resource/new_output/words_feature.npz', feature_df=df,columns=df.columns)

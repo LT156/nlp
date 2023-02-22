@@ -1,15 +1,17 @@
 
 from ast import literal_eval
+from get_demo_path import get_path
+demo_path = get_path()+'/words'
 
 if __name__=='__main__':
-    demo_path = 'F:/work/style_emotion/words'
     
-    f = open(demo_path+'/source/new_output/artemis_NN_counter.txt','r')
+    
+    f = open(demo_path+'/resource/new_output/artemis_NN_counter.txt','r')
     content=f.read()
     f.close()
     artemis_NN_counter = dict(literal_eval(content))
     
-    f = open(demo_path+'/source/new_output/artemis_abstract_dict.txt','r')
+    f = open(demo_path+'/resource/new_output/artemis_abstract_dict.txt','r')
     content=f.read()
     f.close()
     artemis_abstract_dict = dict(literal_eval(content))
@@ -34,7 +36,7 @@ if __name__=='__main__':
     w_count_2
     
     data = words_2[:1000]
-    f = open(demo_path+'/source/new_output/artemis_abstract_1000.txt','w')
+    f = open(demo_path+'/resource/new_output/artemis_abstract_1000.txt','w')
     f.write(str(data).encode('gbk','ignore').decode('gbk'))
     f.close()
     

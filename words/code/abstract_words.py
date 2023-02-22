@@ -5,13 +5,14 @@ import wordcloud
 from tqdm import tqdm
 from collections import Counter
 from nltk.corpus import stopwords
-demo_path = 'F:/work/style_emotion/words'
+from get_demo_path import get_path
+demo_path = get_path()+'/words'
 
 wnl = nltk.stem.WordNetLemmatizer()
 stopset = set(stopwords.words('english'))
 
 #抽象字典准备：
-brm_file = demo_path+'/source/data_file/Concreteness_ratings_Brysbaert_et_al_BRM.xlsx'
+brm_file = demo_path+'/resource/data_file/Concreteness_ratings_Brysbaert_et_al_BRM.xlsx'
 brm_data = pd.read_excel(brm_file,sheet_name=0)
 brm_data.Word = brm_data.Word.apply(lambda x: str(x).lower()) 
 brm_data = brm_data[brm_data.Dom_Pos != 'Article']
@@ -38,7 +39,7 @@ def get_NNwords(text):
 
 if __name__=='__main__':
     
-    df = pd.read_csv(demo_path+'/source/data_file/artemis_preprocessed.csv')
+    df = pd.read_csv(demo_path+'/resource/data_file/artemis_preprocessed.csv')[:100]
     text_list = df['utterance'].tolist()
     text_list = [text.lower() for text in text_list]
     
@@ -54,14 +55,14 @@ if __name__=='__main__':
     print('NN_words:',len(NN_words),len(set(NN_words)))
         
     data = NN_words
-    f = open(demo_path+'/source/new_output/NN_words.txt','w')
+    f = open(demo_path+'/resource/new_output/NN_words.txt','w')
     f.write(str(data).encode('gbk','ignore').decode('gbk'))
     f.close()
     
     count = Counter(NN_words)
     cc=sorted(count.items(),key=lambda x:x[1],reverse=True) #按照值从大到小排序
     data = cc
-    f = open(demo_path+'/source/new_output/artemis_NN_counter.txt','w')
+    f = open(demo_path+'/resource/new_output/artemis_NN_counter.txt','w')
     f.write(str(data).encode('gbk','ignore').decode('gbk'))
     f.close()
     
@@ -84,10 +85,10 @@ if __name__=='__main__':
     print('abstract_words:',len(abstract_words),len(set(abstract_words)))
     print('words_2:',len(words_2),len(set(words_2)))
     
-    print('abstract_words_avg_source:',values/len(abstract_words))
+    print('abstract_words_avg_resource:',values/len(abstract_words))
     
     data = set(missed_words)
-    f = open(demo_path+'/source/new_output/artemis_missed_words.txt','w')
+    f = open(demo_path+'/resource/new_output/artemis_missed_words.txt','w')
     f.write(str(data).encode('gbk','ignore').decode('gbk'))
     f.close()
     
@@ -98,11 +99,11 @@ if __name__=='__main__':
     artemis_abstract_dict = sorted(artemis_abstract_dict.items(), key=lambda x: x[1])
         
     data = artemis_abstract_dict
-    f = open(demo_path+'/source/new_output/artemis_abstract_dict.txt','w')
+    f = open(demo_path+'/resource/new_output/artemis_abstract_dict.txt','w')
     f.write(str(data).encode('gbk','ignore').decode('gbk'))
     f.close()
     
-    df.to_csv(demo_path+'/source/new_output/artemis_abstract_dict_df.csv')
+    df.to_csv(demo_path+'/resource/new_output/artemis_abstract_dict_df.csv')
     
     
     

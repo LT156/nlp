@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
-demo_path='F:/work/style_emotion/words'
+from get_demo_path import get_path
+demo_path = get_path()+'/words'
 if __name__=='__main__':
     loaded = np.load('F:/work/style_emotion/words/source/new_output/words_feature.npz',allow_pickle=True)
     df2= pd.DataFrame(loaded['feature_df'],columns=loaded['columns'])
