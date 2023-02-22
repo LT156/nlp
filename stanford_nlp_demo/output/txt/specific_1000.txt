@@ -1,1 +1,0 @@
-['book', 'glove', 'elbow', 'table', 'face', 'house', 'dress', 'dish', 'pear', 'palm', 'tree', 'flower', 'page', 'ocean', 'arm']
