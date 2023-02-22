@@ -92,3 +92,5 @@ edgeList.remove((WIDTH, HEIGHT-1, WIDTH, HEIGHT))
 for edge in edgeList:
 	drawLine(edge[0], edge[1], edge[2], edge[3])
 plt.show()
+
+print('END')
